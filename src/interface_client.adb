@@ -30,11 +30,6 @@ package body Interface_Client is
       Channel.Connect(addr);
    end Init;
 
-   function GetStatusMsg return String is
-   begin
-      return Status.GetLastStatus;
-   end GetStatusMsg;
-
 
 
    procedure Sum (x : in Integer; y : in Integer; result : out Integer; rpc_status : out StatusType) is
@@ -56,8 +51,6 @@ package body Interface_Client is
 
       rpc_status := Code_To_Enum(res.Header.Status_Code);
 
-      -- Add Status to status stack
-      Status.AddStatus(res.Header.Status_Code, res.Header.Status_Message);
       ConvertToSpecific(res, specific_res);
 
       -- Check if Data is valid
@@ -93,8 +86,6 @@ package body Interface_Client is
 
       rpc_status := Code_To_Enum(res.Header.Status_Code);
 
-      -- Add Status to status stack
-      Status.AddStatus(res.Header.Status_Code, res.Header.Status_Message);
       ConvertToSpecific(res, specific_res);
 
       -- Check if Data is valid

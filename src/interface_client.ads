@@ -5,9 +5,6 @@ package Interface_Client is
    -- Initialisation of Interface, call at beginning
    procedure Init (addr : in String);
 
-   -- Retrieves message of last status in queue
-   function GetStatusMsg return String;
-
    type StatusType is (Rpc_Status_Success,
                        Rpc_Status_Invalid_Conversion,
                        Rpc_Status_Invalid_Method_Code,

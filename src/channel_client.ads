@@ -1,7 +1,5 @@
 with Request;
 with Response;
-with Anet.Sockets.Unix;
-with Ada.Streams;
 
 package Channel_Client is
 

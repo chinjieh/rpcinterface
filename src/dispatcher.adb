@@ -21,8 +21,6 @@ package body Dispatcher is
          when others =>
             -- Create Response with Error
             Response.SetStatusCode(res, Status.RPC_INVALID_METHOD_CODE);
-            Response.SetStatusMessage(res, "Invalid Method Code found: " &
-                                        Request.MethodCodeType'Image(Request.getMethodCode(req)));
 
       end case;
 

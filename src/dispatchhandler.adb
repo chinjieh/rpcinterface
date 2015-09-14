@@ -8,8 +8,6 @@ package body DispatchHandler is
    begin
       Response.SetStatusCode(res => res,
                              c => Status.RPC_INVALID_CONVERSION);
-      Response.SetStatusMessage(res => res,
-                                msg => "Conversion Error occured.");
 
    end GenerateInvalidResponse;
 
@@ -30,7 +28,6 @@ package body DispatchHandler is
 
          ConvertToResponse(data => specific_res,
                            status => Status.RPC_SUCCESS,
-                           statusmsg => "RPC Call Successful",
                            res => res);
       else
 
@@ -55,7 +52,6 @@ package body DispatchHandler is
 
          ConvertToResponse(data => specific_res,
                            status => Status.RPC_SUCCESS,
-                           statusmsg => "RPC Call Successful",
                            res => res);
       else
 

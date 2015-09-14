@@ -14,17 +14,14 @@ begin
    if (code = Interface_Client.Rpc_Status_Success) then
 
        Put_Line("Result is : " & Integer'Image(result));
-       Put_Line("Message is : " & Interface_Client.GetStatusMsg);
 
      end if;
 
    Interface_Client.Sum(4,6,result, code);
    Put_Line("Result is : " & Integer'Image(result));
-   Put_Line("Message is : " & Interface_Client.GetStatusMsg);
 
    Interface_Client.Minus(4,6,result, code);
    Put_Line("Result is : " & Integer'Image(result));
-   Put_Line("Message is : " & Interface_Client.GetStatusMsg);
 
 
 end main;

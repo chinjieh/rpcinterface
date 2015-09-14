@@ -33,6 +33,7 @@ procedure Test is
 
 begin
 
+   beforeconvert.x := 10;
    midconvert := UnconstrainedToGeneric(beforeconvert);
    afterconvert := GenericToConstrained(midconvert);
 

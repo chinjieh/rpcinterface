@@ -5,14 +5,9 @@ package Response is
 
    RESPONSE_SIZE : constant := 2048;
    HEADER_SIZE : constant := 256;
-   HEADER_MESSAGE_SIZE : constant := 128;
    BODY_SIZE : constant := RESPONSE_SIZE - HEADER_SIZE;
 
-   -- Instantiate MessageHandler Package to handle bounded strings
-   package MessageHandler is new Ada.Strings.Bounded.Generic_Bounded_Length(HEADER_MESSAGE_SIZE);
-
    subtype Status_Type is Interfaces.Unsigned_64;
-   subtype MessageType is MessageHandler.Bounded_String;
 
 
    type Data_Type is new Interfaces.Unsigned_64;
@@ -22,7 +17,6 @@ package Response is
    type Header_Type is
       record
          Status_Code : Status_Type;
-         Status_Message : MessageType;
       end record;
    for Header_Type'Size use HEADER_SIZE * 8;
 
@@ -49,9 +43,6 @@ package Response is
    -- Set Status Code
    procedure SetStatusCode(res : in out Response_Type ; c : in Status_Type);
 
-   -- Set Status Message
-   procedure SetStatusMessage(res : in out Response_Type ; msg : in String);
-
       -- Converts a Response_DataType record into a Specific_Data record of methods
    generic
       type specific is private;
@@ -61,7 +52,6 @@ package Response is
       type specific is private;
       procedure ConvertToResponse(data : in specific;
                                status : in Status_Type;
-                               statusmsg : in String;
                                res : out Response_Type);
 
 end Response;

@@ -65,18 +65,6 @@ package body Channel_Server is
 
          Put_Line("Response sent.");
 
-            --
-            -- Convert Request's Data to Specific Request
-            --ConvertToSpecific(req.Data, specific_req);
-            --Put_Line("Request received. Method Code: " & Request.MethodCodeType'Image(Request.getMethodCode(req)));
-            --specific_res.result := specific_req.x + specific_req.y;
-
-            --ConvertToResponse(specific_res, res.Data);
-            --Response.SetStatusCode(res, Status.RPC_SUCCESS);
-            --Response.SetStatusMessage(res, "Success!");
-
-            -- Write data to Anet Stream Response
-
       end Handle_Request;
    begin
 
