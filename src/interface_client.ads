@@ -1,3 +1,5 @@
+with Interface_Status;
+
 package Interface_Client is
 
    Invalid_Conversion_From_Response : exception;
@@ -5,10 +7,8 @@ package Interface_Client is
    -- Initialisation of Interface, call at beginning
    procedure Init (addr : in String);
 
-   type StatusType is (Rpc_Status_Success,
-                       Rpc_Status_Invalid_Conversion,
-                       Rpc_Status_Invalid_Method_Code,
-                       Rpc_Status_Unknown_Status);
+   subtype StatusType is Interface_Status.StatusType;
+
 
    -- Client Interface Methods --
    ------------------------------

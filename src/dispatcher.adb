@@ -1,7 +1,7 @@
 with Request;
 with Response;
 with Method;
-with Status;
+with Interface_Status;
 with DispatchHandler;
 with Ada.Text_IO; use Ada.Text_IO;
 
@@ -20,7 +20,7 @@ package body Dispatcher is
             DispatchHandler.Handle_Minus(req, res);
          when others =>
             -- Create Response with Error
-            Response.SetStatusCode(res, Status.RPC_INVALID_METHOD_CODE);
+            Response.SetStatusCode(res, Interface_Status.Rpc_Invalid_Method_Code);
 
       end case;
 

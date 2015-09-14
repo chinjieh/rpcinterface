@@ -1,17 +1,18 @@
 with Ada.Text_IO; use Ada.Text_IO;
-with Interface_Client; use type Interface_Client.StatusType;
+with Interface_Client;
+with Interface_Status; use type Interface_Status.StatusType;
 
 procedure main is
 
    result : Integer;
-   code : Interface_Client.StatusType;
+   code : Interface_Status.StatusType;
 
 begin
    Put_Line("Starting..");
    Interface_Client.Init(addr => "./temp/socket.temp");
    Interface_Client.Sum(20,5,result, code);
    Put_Line(code'Img);
-   if (code = Interface_Client.Rpc_Status_Success) then
+   if (code = Interface_Status.Rpc_Success) then
 
        Put_Line("Result is : " & Integer'Image(result));
 

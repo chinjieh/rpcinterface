@@ -1,13 +1,13 @@
 with Interface_Server;
 with Method_Sum;
 with Method_Minus;
-with Status;
+with Interface_Status;
 package body DispatchHandler is
 
    procedure GenerateInvalidResponse (res : out Response.Response_Type) is
    begin
       Response.SetStatusCode(res => res,
-                             c => Status.RPC_INVALID_CONVERSION);
+                             enum => Interface_Status.Rpc_Invalid_Conversion);
 
    end GenerateInvalidResponse;
 
@@ -27,7 +27,7 @@ package body DispatchHandler is
          Interface_Server.Sum(specific_req.x, specific_req.y, specific_res.result);
 
          ConvertToResponse(data => specific_res,
-                           status => Status.RPC_SUCCESS,
+                           status => Interface_Status.Rpc_Success,
                            res => res);
       else
 
@@ -51,7 +51,7 @@ package body DispatchHandler is
          Interface_Server.Minus(specific_req.x, specific_req.y, specific_res.result);
 
          ConvertToResponse(data => specific_res,
-                           status => Status.RPC_SUCCESS,
+                           status => Interface_Status.Rpc_Success,
                            res => res);
       else
 

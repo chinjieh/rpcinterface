@@ -1,5 +1,5 @@
 with Interfaces;
-with Ada.Strings.Bounded;
+with Interface_Status;
 
 package Response is
 
@@ -41,17 +41,18 @@ package Response is
 
 
    -- Set Status Code
-   procedure SetStatusCode(res : in out Response_Type ; c : in Status_Type);
+   procedure SetStatusCode(res : in out Response_Type ; enum : in Interface_Status.StatusType);
 
-      -- Converts a Response_DataType record into a Specific_Data record of methods
+   -- Converts a Response_Type record into a Specific_Data record of methods
    generic
       type specific is private;
    procedure ConvertToSpecific(req : in Response_Type; data : out specific);
 
+   -- Converts a Specific Data type into a Response_Type with status code
    generic
       type specific is private;
       procedure ConvertToResponse(data : in specific;
-                               status : in Status_Type;
+                               status : in Interface_Status.StatusType;
                                res : out Response_Type);
 
 end Response;

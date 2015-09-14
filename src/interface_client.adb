@@ -4,24 +4,12 @@ with Method;
 with Request;
 with Response;
 with Channel_Client;
-with Status;
+with Interface_Status;
 with Interfaces;
 with Ada.Text_IO;
 
 package body Interface_Client is
    package Channel renames Channel_Client;
-
-   function Code_To_Enum (Code : Interfaces.Unsigned_64) return StatusType is
-   begin
-
-      case Code is
-         when 0 => return Rpc_Status_Success;
-         when 1 => return Rpc_Status_Invalid_Method_Code;
-         when 2 => return Rpc_Status_Invalid_Conversion;
-         when others => return Rpc_Status_Unknown_Status;
-      end case;
-
-   end Code_To_Enum;
 
 
    procedure Init (addr : in String) is
@@ -29,7 +17,6 @@ package body Interface_Client is
       Channel.Init;
       Channel.Connect(addr);
    end Init;
-
 
 
    procedure Sum (x : in Integer; y : in Integer; result : out Integer; rpc_status : out StatusType) is
@@ -49,7 +36,7 @@ package body Interface_Client is
 
       Channel.Send_Receive(req, res);
 
-      rpc_status := Code_To_Enum(res.Header.Status_Code);
+      rpc_status := Interface_Status.Code_To_Enum(res.Header.Status_Code);
 
       ConvertToSpecific(res, specific_res);
 
@@ -84,7 +71,7 @@ package body Interface_Client is
 
       Channel.Send_Receive(req, res);
 
-      rpc_status := Code_To_Enum(res.Header.Status_Code);
+      rpc_status := Interface_Status.Code_To_Enum(res.Header.Status_Code);
 
       ConvertToSpecific(res, specific_res);
 
