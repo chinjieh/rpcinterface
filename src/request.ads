@@ -1,4 +1,5 @@
 with Interfaces;
+with Common;
 
 package Request is
 
@@ -7,7 +8,8 @@ package Request is
    BODY_SIZE : constant := REQUEST_SIZE - HEADER_SIZE;
 
    type MethodCodeType is new Interfaces.Unsigned_64;
-   type Data_Type is new Interfaces.Unsigned_64;
+
+   type Data_Type is array (1..BODY_SIZE) of Common.Byte;
 
    type Header_Type is
       record

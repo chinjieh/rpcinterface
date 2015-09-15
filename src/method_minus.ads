@@ -9,7 +9,7 @@ package Method_Minus is
             x : Integer;
             y : Integer;
          end record;
-      for Specific_Data'Size use Standard.Request.BODY_SIZE * 8;
+      --for Specific_Data'Size use Standard.Request.BODY_SIZE * 8;
 
       function isValid(data : Specific_Data) return Boolean;
 

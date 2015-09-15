@@ -1,16 +1,16 @@
 with Interfaces;
 with Interface_Status;
+with Common;
 
 package Response is
 
    RESPONSE_SIZE : constant := 2048;
-   HEADER_SIZE : constant := 256;
+   HEADER_SIZE : constant := 8;
    BODY_SIZE : constant := RESPONSE_SIZE - HEADER_SIZE;
 
    subtype Status_Type is Interfaces.Unsigned_64;
 
-
-   type Data_Type is new Interfaces.Unsigned_64;
+   type Data_Type is array (1..BODY_SIZE) of Common.Byte;
 
    -- Header_Type is left as obvious types (not referencing other packages)
    -- for future ease of conversion to different languages

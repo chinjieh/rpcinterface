@@ -11,13 +11,24 @@ package body Request is
 
    procedure ConvertToSpecific(req : in Request_Type; data : out specific) is
 
+      Bits_Difference : Integer := Request_DataType'Size - specific'Size;
+
+      type ByteArray is array(1..Bits_Difference/8) of Common.Byte;
+
+      type PaddedData is
+         record
+            specificdata : specific;
+            padding : ByteArray;
+         end record;
+
+
       function Convert is new Ada.Unchecked_Conversion(Source => Request_DataType,
-                                                       Target => specific);
+                                                       Target => PaddedData);
 
-      converted : specific;
+      padded : PaddedData;
    begin
-      converted := Convert(req.Data);
-
+      padded := Convert(req.Data);
+      data := padded.specificdata;
 
       --if isValid(data) then
      --    Put_Line("Conversion To Specific succeeded.");
@@ -25,20 +36,35 @@ package body Request is
      --    Put_Line("Conversion To Specific failed.");
      -- end if;
 
-      data := converted;
+
    end ConvertToSpecific;
 
 
    procedure ConvertToRequest(data : in specific;
                               code : in MethodCodeType;
                               req : out Request_Type) is
-      function Convert is new Ada.Unchecked_Conversion(Source => specific,
+
+      Bits_Difference : Integer := Request_DataType'Size - specific'Size;
+
+      type ByteArray is array (1..Bits_Difference/8) of Common.Byte;
+
+      type PaddedData is
+         record
+            specificdata : specific;
+            padding : ByteArray;
+         end record;
+
+
+      function Convert is new Ada.Unchecked_Conversion(Source => PaddedData,
                                                        Target => Request_DataType);
 
       reqdata : Request_DataType;
-
+      padded : PaddedData;
+      padding : ByteArray := (others => 0);
    begin
-      reqdata := Convert(data);
+      padded.specificdata := data;
+      padded.padding := padding;
+      reqdata := Convert(padded);
       req.Data := reqdata;
       req.Header.Method_Code := code;
 
