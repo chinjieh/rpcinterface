@@ -46,7 +46,7 @@ package Response is
    -- Converts a Response_Type record into a Specific_Data record of methods
    generic
       type specific is private;
-   procedure ConvertToSpecific(req : in Response_Type; data : out specific);
+   procedure ConvertToSpecific(res : in Response_Type; data : out specific);
 
    -- Converts a Specific Data type into a Response_Type with status code
    generic

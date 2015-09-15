@@ -11,7 +11,7 @@ package body Request is
 
    procedure ConvertToSpecific(req : in Request_Type; data : out specific) is
 
-      Bits_Difference : Integer := Request_DataType'Size - specific'Size;
+      Bits_Difference : Natural := Request_DataType'Size - specific'Size;
 
       type ByteArray is array(1..Bits_Difference/8) of Common.Byte;
 
@@ -30,13 +30,6 @@ package body Request is
       padded := Convert(req.Data);
       data := padded.specificdata;
 
-      --if isValid(data) then
-     --    Put_Line("Conversion To Specific succeeded.");
-      --else
-     --    Put_Line("Conversion To Specific failed.");
-     -- end if;
-
-
    end ConvertToSpecific;
 
 
@@ -44,10 +37,12 @@ package body Request is
                               code : in MethodCodeType;
                               req : out Request_Type) is
 
-      Bits_Difference : Integer := Request_DataType'Size - specific'Size;
+      Bits_Difference : Natural := Request_DataType'Size - specific'Size;
 
       type ByteArray is array (1..Bits_Difference/8) of Common.Byte;
 
+      -- Padded Record to contain specific data, with the padded Bytes to match
+      -- size of Request_Data
       type PaddedData is
          record
             specificdata : specific;
@@ -67,13 +62,6 @@ package body Request is
       reqdata := Convert(padded);
       req.Data := reqdata;
       req.Header.Method_Code := code;
-
-      --TODO add checking here
-      --if isValid(data) then
-     --    Put_Line("Conversion To Specific succeeded.");
-      --else
-     --    Put_Line("Conversion To Specific failed.");
-     -- end if;
 
    end ConvertToRequest;
 
