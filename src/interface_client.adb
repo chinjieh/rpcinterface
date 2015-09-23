@@ -45,6 +45,9 @@ package body Interface_Client is
          result := specific_res.result;
       else
          --TODO dont raise exception
+         -- Check status success
+         --- Convert if successful
+
          raise Invalid_Conversion_From_Response;
       end if;
 
