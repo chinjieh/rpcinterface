@@ -11,6 +11,7 @@ begin
    Put_Line("Starting..");
    Interface_Client.Init(addr => "./temp/socket.temp");
    Interface_Client.Sum(20,5,result, code);
+   Put_Line("Code received: ");
    Put_Line(code'Img);
    if (code = Interface_Status.Rpc_Success) then
 
